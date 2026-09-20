@@ -96,7 +96,7 @@ function SampleCall({ slot, variant }: { slot?: ReactNode; variant: "light" | "d
   );
 }
 
-function OutcomeActions({ onBookCall, onRetry, sampleCallSlot }: { onBookCall?: () => void; onRetry?: () => void; sampleCallSlot?: ReactNode }) {
+function OutcomeActions({ onBookCall, onRetry, sampleCallSlot }: { onBookCall?: (() => void) | undefined; onRetry?: (() => void) | undefined; sampleCallSlot?: ReactNode }) {
   return (
     <div className="mt-8 w-full space-y-3">
       {onRetry ? (
@@ -140,7 +140,7 @@ export default function TryItLive({
     ? {
         firstName: errors.firstName ?? "Enter your first name.",
         phone: errors.phone ?? "Enter a valid US or Canadian mobile number.",
-        consent: errors.consent,
+        ...(errors.consent ? { consent: errors.consent } : {}),
       }
     : errors;
   const digits = phone.replace(/\D/g, "");
