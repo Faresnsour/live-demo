@@ -83,12 +83,12 @@ function Spinner() {
   );
 }
 
-function SampleCall({ slot }: { slot?: ReactNode }) {
+function SampleCall({ slot, variant }: { slot?: ReactNode; variant: "light" | "dark" }) {
   return (
     <div className="mt-5 border-t border-outline-variant pt-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="font-body-md text-sm text-on-surface-variant">
-          Prefer to listen first? <a href="#sample-call" className="font-medium text-primary underline decoration-outline-variant underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Hear a sample call</a>
+        <p className={`font-body-md text-sm ${variant === "dark" ? "text-inverse-on-surface" : "text-on-surface-variant"}`}>
+          Prefer to listen first? <a href="#sample-call" className={`font-medium underline decoration-outline-variant underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-container ${variant === "dark" ? "text-primary-fixed" : "text-primary"}`}>Hear a sample call</a>
         </p>
         {slot ? <div id="sample-call" className="min-w-0">{slot}</div> : <div id="sample-call" className="h-11 w-40 rounded-lg border border-outline-variant bg-surface-container" aria-label="Sample call player slot" />}
       </div>
@@ -290,7 +290,7 @@ export default function TryItLive({
               </form>
             )}
           </div>
-          <SampleCall slot={sampleCallSlot} />
+          <SampleCall slot={sampleCallSlot} variant={previewVariant} />
         </div>
 
         <div className="mt-14 lg:col-start-1 lg:row-start-2 lg:self-end lg:pr-8">
